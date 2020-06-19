@@ -47,22 +47,6 @@
        </div>
        <img style="position: absolute; top: 30px; left: 156px" id="monitor" src="">
        <img style="position: relative; width: 480; height:720" src="images/monitor.png">
-	   <video id="video" autoplay="true" controls="controls"></video>
-	  <script>
-		if (Hls.isSupported()) {
-		  var video = document.getElementById('video');
-		  var hls = new Hls();
-		  // bind them together
-		  hls.attachMedia(video);
-		  hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-			console.log("video and hls.js are now bound together !");
-			hls.loadSource("http://192.168.0.232/live/mystream.m3u8");
-			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-			  console.log("manifest loaded, found " + data.levels.length + " quality level");
-			});
-		  });
-		}
-	  </script>
     </center>
     </div>
     <center>
