@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/solarized_dark.css">
     <script src="js/keypress-2.1.4.min.js"></script>
     <script src="js/monitor.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
  	var servers = [];
  	//servers['Test Server'] = { name:'Test Server', tty:'/dev/ttyUSB0', vid:'/dev/video0', inp: 1, pin:2 }
@@ -20,6 +21,24 @@
     </script>
 </head>
 <body onload="startRefresh()">
+	<div class="fixed_width_wrapper">	
+	<video id="video" autoplay="true" controls="controls"></video>
+	  <script>
+		if (Hls.isSupported()) {
+		  var video = document.getElementById('video');
+		  var hls = new Hls();
+		  // bind them together
+		  hls.attachMedia(video);
+		  hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+			console.log("video and hls.js are now bound together !");
+			hls.loadSource("http://192.168.0.232/live/mystream.m3u8");
+			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+			  console.log("manifest loaded, found " + data.levels.length + " quality level");
+			});
+		  });
+		}
+	  </script>
+	</div>
     <div class="fixed_width_wrapper">
     <center>
        <div style="float: right">
@@ -28,6 +47,22 @@
        </div>
        <img style="position: absolute; top: 30px; left: 156px" id="monitor" src="">
        <img style="position: relative; width: 480; height:720" src="images/monitor.png">
+	   <video id="video" autoplay="true" controls="controls"></video>
+	  <script>
+		if (Hls.isSupported()) {
+		  var video = document.getElementById('video');
+		  var hls = new Hls();
+		  // bind them together
+		  hls.attachMedia(video);
+		  hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+			console.log("video and hls.js are now bound together !");
+			hls.loadSource("http://192.168.0.232/live/mystream.m3u8");
+			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+			  console.log("manifest loaded, found " + data.levels.length + " quality level");
+			});
+		  });
+		}
+	  </script>
     </center>
     </div>
     <center>
